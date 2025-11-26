@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.javaguru'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    // Use a JDK 25 toolchain if available
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass = 'com.javaguru.part1.InboundOutboundTaskDemo'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    // Compile against Java 25
+    options.release = 21
+    // Enable preview features at compile time
+    options.compilerArgs += '--enable-preview'
+}
+
+tasks.withType(Test).configureEach {
+    // Needed to run tests that use preview features
+    jvmArgs '--enable-preview'
+}
+
+tasks.withType(JavaExec).configureEach {
+    // Needed to run your app with preview features
+    jvmArgs '--enable-preview'
+}
+
+dependencies {
+    implementation("ch.qos.logback:logback-classic:1.5.20")
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
