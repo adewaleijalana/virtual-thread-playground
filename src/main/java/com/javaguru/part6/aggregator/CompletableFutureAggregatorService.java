@@ -13,7 +13,8 @@ public class CompletableFutureAggregatorService {
     }
 
     public ProductDTO getProduct(final int productId)  {
-        var product = CompletableFuture.supplyAsync(() -> Client.getProduct(productId), executorService);
+        var product = CompletableFuture.supplyAsync(() -> Client.getProduct(productId), executorService)
+                .exceptionally(throwable -> null);
         var rating = CompletableFuture.supplyAsync(() -> Client.getRating(productId), executorService)
                 .exceptionally(throwable -> -1);
         return new ProductDTO(productId, product.join(), rating.join());
