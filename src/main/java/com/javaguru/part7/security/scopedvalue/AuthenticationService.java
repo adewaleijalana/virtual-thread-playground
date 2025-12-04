@@ -23,4 +23,11 @@ public class AuthenticationService {
         ScopedValue.where(SecurityContextHolder.getScopedContext(), securityContext)
                 .run(runnable);
     }
+
+    public static void runAsAdmin(Runnable runnable) {
+        var context = SecurityContextHolder.getContext();
+        var securityContext = new SecurityContext(context.userId(), UserRole.ADMIN);
+        ScopedValue.where(SecurityContextHolder.getScopedContext(), securityContext)
+                .run(runnable);
+    }
 }

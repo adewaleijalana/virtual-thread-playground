@@ -12,6 +12,8 @@ public class SecurityContextHolder {
         return SCOPED_VALUE;
     }
     public static SecurityContext getContext() {
+        SCOPED_VALUE.get();
+//        return SCOPED_VALUE.orElse(ANONYMOUS_CONTEXT);
         return SCOPED_VALUE.orElse(ANONYMOUS_CONTEXT);
     }
 }
