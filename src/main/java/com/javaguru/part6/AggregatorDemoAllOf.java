@@ -1,12 +1,10 @@
 package com.javaguru.part6;
 
-import com.javaguru.part4.aggregator.AggregatorService;
 import com.javaguru.part4.aggregator.ProductDTO;
 import com.javaguru.part6.aggregator.CompletableFutureAggregatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
@@ -17,7 +15,7 @@ public class AggregatorDemoAllOf {
     private static final Logger log = LoggerFactory.getLogger(AggregatorDemoAllOf.class);
 
     static void main(String[] args) {
-        try(var executorService = Executors.newVirtualThreadPerTaskExecutor()) {
+        try (var executorService = Executors.newVirtualThreadPerTaskExecutor()) {
             var aggregator = new CompletableFutureAggregatorService(executorService);
 
             var futures = IntStream.range(1, 100)
