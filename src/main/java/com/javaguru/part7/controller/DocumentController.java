@@ -5,7 +5,6 @@ import com.javaguru.part7.security.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.file.AccessDeniedException;
 import java.util.function.Supplier;
 
 public class DocumentController {
